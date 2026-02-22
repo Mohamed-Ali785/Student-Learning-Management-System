@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - LMS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body onload="checkLogin()">
+
+<!-- Navbar -->
+<nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="courses.html">Courses</a>
+    <a href="profile.html">Profile</a>
+    <button onclick="logout()">Logout</button>
+</nav>
+
+<div class="container">
+    <div class="clock" id="clock"></div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="card"><p>Total Tasks</p><h2 id="totalTasks"></h2></div>
+        <div class="card"><p>Completed Tasks</p><h2 id="completedTasks"></h2></div>
+        <div class="card"><p>Pending Tasks</p><h2 id="pendingTasks"></h2></div>
+        <div class="card"><p>Total Courses</p><h2 id="totalCourses"></h2></div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="announcements">
+        <h3>Announcements</h3>
+        <p id="announcementText"></p>
+        <button onclick="nextAnnouncement()">Next</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+startClock("clock");
+
+const announcements=[
+    "📢 New assignment posted in Math 101.",
+    "📅 Live Physics session at 2 PM.",
+    "🔔 Submit Chemistry report by Friday.",
+    "🏆 Congrats to John for AI course completion!"
+];
+let currentIndex=0;
+function showAnnouncement(){ document.getElementById("announcementText").innerText=announcements[currentIndex]; }
+function nextAnnouncement(){ currentIndex=(currentIndex+1)%announcements.length; showAnnouncement(); }
+showAnnouncement();
+
+// Stats from localStorage
+const tasks = JSON.parse(localStorage.getItem("tasks"))||[];
+const totalTasks = tasks.length;
+const completedTasks = tasks.filter(t=>t.completed).length;
+const pendingTasks = totalTasks - completedTasks;
+const courses = JSON.parse(localStorage.getItem("courses"))||[];
+const totalCourses = courses.length;
+
+document.getElementById("totalTasks").innerText=totalTasks;
+document.getElementById("completedTasks").innerText=completedTasks;
+document.getElementById("pendingTasks").innerText=pendingTasks;
+document.getElementById("totalCourses").innerText=totalCourses;
+</script>
+</body>
+</html>
