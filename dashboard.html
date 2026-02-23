@@ -6,7 +6,7 @@
 <title>Dashboard - LMS</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body onload="checkLogin()">
+<body>
 
 <!-- Navbar -->
 <nav>
@@ -18,7 +18,10 @@
 </nav>
 
 <div class="container">
-    <div class="clock" id="clock"></div>
+    <div class="first">
+        <div class="user">Hello User✌️</div>
+        <div class="clock" id="clock">Clock</div>
+    </div>
 
     <!-- Stats -->
     <div class="stats">
@@ -38,13 +41,14 @@
 
 <script src="script.js"></script>
 <script>
+
 startClock("clock");
 
 const announcements=[
-    "📢 New assignment posted in Math 101.",
-    "📅 Live Physics session at 2 PM.",
-    "🔔 Submit Chemistry report by Friday.",
-    "🏆 Congrats to John for AI course completion!"
+    "📢 New assignment posted in Java.",
+    "📅 Live Cloud session at 2 PM.",
+    "🔔 Submit Client Side Technologies by Friday.",
+    "🏆 Congrats to Mohmamed for C/C++ course completion!"
 ];
 let currentIndex=0;
 function showAnnouncement(){ document.getElementById("announcementText").innerText=announcements[currentIndex]; }

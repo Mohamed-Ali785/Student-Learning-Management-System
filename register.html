@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Register</h1>
+        <form>
+            <input id="name" type="text" placeholder="Username" pattern="[A-Za-z\s]+" required>
+            <input id="faculty" type="text" placeholder="Faculty" pattern="[A-Za-z\s]+" required>
+            <input id="email" type="text" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                required>
+            <input type="password" placeholder="Password" minlength="6" required>
+            <input type="password" placeholder="Confirm Password" minlength="6" required>
+            <input type="submit" value="Register">
+        </form>
+
+    </div>
+    <script>
+        form = document.querySelector("form");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const fullName = document.getElementById("name").value;
+            const faculty = document.getElementById("faculty").value;
+            const email = document.getElementById("email").value;
+            const passwords = document.querySelectorAll("input[type='password']");
+            const password = passwords[0].value;
+            const confirm = passwords[1].value;
+            if (confirm !== password) {
+                alert("Password don't match!");
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem("users")) ||[];
+            const emailExists = users.some(u => u.email === email);
+            if (emailExists) {
+                alert("Email already registered!");
+                return;
+            }
+            const user = {
+                name: fullName,
+                faculty: faculty,
+                email: email,
+                password: password
+            };
+            users.push(user);
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Registered Successfully");
+        })
+    </script>
+</body>
+
+</html>

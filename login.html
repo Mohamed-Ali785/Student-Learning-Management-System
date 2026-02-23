@@ -6,64 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #1c1c39, #1515d3);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .card {
-            width: 350px;
-            padding: 40px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .card h1 {
-            margin-bottom: 30px;
-            color: #1c1c93;
-        }
-
-        .card input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .card input:focus {
-            border-color: #4a4ad1;
-            box-shadow: 0 0 5px rgba(74, 74, 209, 0.4);
-        }
-
-        input[type="submit"] {
-            background-color: #1c1c93;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #4a4ad1;
-            transform: translateY(-2px);
-        }
-    </style>
+    <link rel="stylesheet" href="style1.css">
 </head>
 
 <body>
@@ -71,13 +14,39 @@
     <div class="card">
         <h1>Login</h1>
         <form>
-            <input type="text" placeholder="Username" pattern="[A-Za-z\s]+" required>
+            <input id="email" type="text" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                required>
             <input type="password" placeholder="Password" minlength="6" required>
+            <span id="error" >Invalid email or password </span>
             <input type="submit" value="Login">
+            <span>Don't have account?<a href="register.html"><button type="button">Register</button></a>
         </form>
 
     </div>
+    <script>
+        form = document.querySelector("form");
 
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const email = document.getElementById("email").value;
+            const password = document.querySelector("input[type='password']").value;
+            const index = users.findIndex(u => u.email === email);
+            error=document.getElementById("error");
+            
+            if (index===-1) {
+                error.style.display="flex";
+                return;
+            }
+            if (users[index].password === password) {
+                localStorage.setItem("currentUserIndex", index);
+                window.location.href = "dashboard.html";
+            } else {
+                error.style.display="flex";
+                return;
+            }
+        })
+    </script>
 </body>
 
 </html>
