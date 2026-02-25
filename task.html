@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="task.html">Tasks</a>
+        <a href="courses.html">Courses</a>
+        <a href="profile.html">Profile</a>
+        <button onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="create">
+        <h2> Task Manger</h2>
+        <div class="add">
+            <form id="inputs" onsubmit="add(event)">
+                <input id="title" class="text" type="text" placeholder="Title" required>
+                <input id="dueDate" class="text" type="date" required>
+                <select id="priority" class="text" id="Priority">
+                    <option value="High">High</option>
+                    <option value="Medium">Meddium</option>
+                    <option value="Low">Low</option>
+                </select>
+                <input type="submit" value="Add" id="addTask">
+            </form>
+
+        </div>
+        <div>
+            <input class="text" id="searchInput" type="search" placeholder="search">
+            <select class="text" onchange="showTask()">
+                <option value="">Sort By</option>
+                <option value="priority">Priority</option>
+                <option value="date">Due Date</option>
+            </select>
+        </div>
+    </div>
+    <div class="create">
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="taskList">
+            </tbody>
+        </table>
+    </div>
+    <script src="task.js"></script>
+</body>
+
+</html>

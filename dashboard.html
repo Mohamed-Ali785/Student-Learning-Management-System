@@ -11,7 +11,7 @@
 <!-- Navbar -->
 <nav>
     <a href="dashboard.html">Dashboard</a>
-    <a href="tasks.html">Tasks</a>
+    <a href="task.html">Tasks</a>
     <a href="courses.html">Courses</a>
     <a href="profile.html">Profile</a>
     <button onclick="logout()">Logout</button>
@@ -40,33 +40,6 @@
 </div>
 
 <script src="script.js"></script>
-<script>
 
-startClock("clock");
-
-const announcements=[
-    "📢 New assignment posted in Java.",
-    "📅 Live Cloud session at 2 PM.",
-    "🔔 Submit Client Side Technologies by Friday.",
-    "🏆 Congrats to Mohmamed for C/C++ course completion!"
-];
-let currentIndex=0;
-function showAnnouncement(){ document.getElementById("announcementText").innerText=announcements[currentIndex]; }
-function nextAnnouncement(){ currentIndex=(currentIndex+1)%announcements.length; showAnnouncement(); }
-showAnnouncement();
-
-// Stats from localStorage
-const tasks = JSON.parse(localStorage.getItem("tasks"))||[];
-const totalTasks = tasks.length;
-const completedTasks = tasks.filter(t=>t.completed).length;
-const pendingTasks = totalTasks - completedTasks;
-const courses = JSON.parse(localStorage.getItem("courses"))||[];
-const totalCourses = courses.length;
-
-document.getElementById("totalTasks").innerText=totalTasks;
-document.getElementById("completedTasks").innerText=completedTasks;
-document.getElementById("pendingTasks").innerText=pendingTasks;
-document.getElementById("totalCourses").innerText=totalCourses;
-</script>
 </body>
 </html>

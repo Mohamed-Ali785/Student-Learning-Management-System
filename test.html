@@ -1,89 +1,52 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - LMS</title>
-<link rel="stylesheet" href="style.css">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="tasks.html">Tasks</a>
-    <a href="courses.html">Courses</a>
-    <a href="profile.html">Profile</a>
-    <button onclick="logout()">Logout</button>
-</nav>
+<h2>Task Manager</h2>
 
-<div class="container">
-    <div class="clock" id="clock"></div>
+<div class="task-form">
+    <input type="text" id="title" placeholder="Task Title">
+    <input type="date" id="dueDate">
 
-    <div class="stats">
-        <div class="card"><p>Total Tasks</p><h2 id="totalTasks"></h2></div>
-        <div class="card"><p>Completed Tasks</p><h2 id="completedTasks"></h2></div>
-        <div class="card"><p>Pending Tasks</p><h2 id="pendingTasks"></h2></div>
-        <div class="card"><p>Total Courses</p><h2 id="totalCourses"></h2></div>
-    </div>
+    <select id="priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+    </select>
 
-    <div class="announcements">
-        <h3>Announcements</h3>
-        <p id="announcementText"></p>
-        <button onclick="nextAnnouncement()">Next</button>
-    </div>
+    <button onclick="addTask()">Add Task</button>
 </div>
 
-<script>
-    // Redirect if not logged in
-    if(!localStorage.getItem("username")){
-        window.location.href = "index.html";
-    }
+<div class="controls">
+    <input type="text" id="search" placeholder="Search..." onkeyup="renderTasks()">
 
-    // Clock
-    function updateClock(){
-        const now = new Date();
-        document.getElementById("clock").innerText = now.toLocaleTimeString();
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+    <select id="sort" onchange="renderTasks()">
+        <option value="">Sort By</option>
+        <option value="priority">Priority</option>
+        <option value="date">Due Date</option>
+    </select>
+</div>
 
-    // Announcements
-    const announcements = [
-        "📢 New assignment posted in Math 101",
-        "📅 Live Physics session today at 2 PM",
-        "🔔 Submit Chemistry report by Friday",
-        "🏆 Congratulations to John for AI course completion!"
-    ];
-    let currentIndex = 0;
-    function showAnnouncement(){
-        document.getElementById("announcementText").innerText = announcements[currentIndex];
-    }
-    function nextAnnouncement(){
-        currentIndex = (currentIndex+1)%announcements.length;
-        showAnnouncement();
-    }
-    showAnnouncement();
+<h2>Task Manager</h2>
 
-    // Statistics (example from localStorage)
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const totalTasks = tasks.length;
-    const completedTasks = tasks.filter(t => t.completed).length;
-    const pendingTasks = totalTasks - completedTasks;
-    const courses = JSON.parse(localStorage.getItem("courses")) || [];
-    const totalCourses = courses.length;
+<table class="task-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="taskList">
+    </tbody>
+</table>
 
-    document.getElementById("totalTasks").innerText = totalTasks;
-    document.getElementById("completedTasks").innerText = completedTasks;
-    document.getElementById("pendingTasks").innerText = pendingTasks;
-    document.getElementById("totalCourses").innerText = totalCourses;
-
-    // Logout
-    function logout(){
-        localStorage.clear();
-        window.location.href = "index.html";
-    }
-</script>
+<script src="test.js"></script>
 </body>
 </html>

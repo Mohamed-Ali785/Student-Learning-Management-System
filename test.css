@@ -1,0 +1,98 @@
+body {
+    font-family: Arial;
+    width: 600px;
+    margin: auto;
+}
+
+.task-form, .controls {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 8px;
+    margin: 5px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    width: 80%;
+    margin: 40px auto;
+    background: #f9f9f9;
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.task-table thead {
+    background: #1e293b;
+    color: white;
+}
+
+.task-table th,
+.task-table td {
+    padding: 14px;
+    text-align: center;
+}
+
+.task-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: 0.3s;
+}
+
+.task-table tbody tr:hover {
+    background: #f1f5f9;
+}
+
+.high {
+    color: red;
+    font-weight: bold;
+}
+
+.medium {
+    color: orange;
+    font-weight: bold;
+}
+
+.low {
+    color: green;
+    font-weight: bold;
+}
+
+.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 2px;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.done-btn {
+    background: #22c55e;
+    color: white;
+}
+
+.delete-btn {
+    background: #ef4444;
+    color: white;
+}
+
+.done-btn:hover {
+    background: #16a34a;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
