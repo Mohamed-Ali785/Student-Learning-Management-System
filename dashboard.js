@@ -34,13 +34,14 @@ function showAnnouncement() { document.getElementById("announcementText").innerT
 function nextAnnouncement() { currentIndex = (currentIndex + 1) % announcements.length; showAnnouncement(); }
 showAnnouncement();
 
-const tasks = users[index].tasks
+const tasks = users[index].tasks||[];
 const totalTasks = tasks.length;
 const completedTasks = tasks.filter(t => t.completed).length;
 const pendingTasks = totalTasks - completedTasks;
 
-const courses=users[index].courses;
+const courses=users[index].courses||[];
 const totalCourses=courses.length;
+
 document.getElementById("totalTasks").innerText = totalTasks;
 document.getElementById("completedTasks").innerText = completedTasks;
 document.getElementById("pendingTasks").innerText = pendingTasks;

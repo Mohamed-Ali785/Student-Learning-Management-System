@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body id="profileBody">
+
+
+<nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="task.html">Tasks</a>
+    <a href="courses.html">Courses</a>
+    <a href="profile.html">Profile</a>
+    <button onclick="logout()">Logout</button>
+</nav>   
+
+<div class="profile">
+    <div class="title">Full Name</div>
+    <div class="data" id="name"> name</div>
+    <div class="title">Faculty</div>
+    <div class="data" id="faculty"> Faculty</div>
+    <div class="title">Email</div>
+    <div class="data" id="email"> Email</div>
+
+    <div id="edit">
+        <button class="edit-btn" onclick="editProfile()">Edit</button>
+    </div>
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>

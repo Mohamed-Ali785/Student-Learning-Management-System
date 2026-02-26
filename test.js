@@ -1,50 +1,42 @@
-let courses = JSON.parse(localStorage.getItem("courses")) || [];
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let index = parseInt(localStorage.getItem("currentUserIndex"));
 
-const form = document.getElementById("courseForm");
-const courseList = document.getElementById("courseList");
-
-function displayCourses() {
-    courseList.innerHTML = "";
-
-    courses.forEach((course, index) => {
-        const li = document.createElement("li");
-
-        li.innerHTML = `
-            <div>
-                <strong>${course.name}</strong><br>
-                <small>${course.instructor}</small>
-            </div>
-            <button class="delete-btn" onclick="deleteCourse(${index})">
-                Delete
-            </button>
-        `;
-
-        courseList.appendChild(li);
-    });
+// 🔐 حماية الصفحة
+if (!localStorage.getItem("currentUserIndex") || !users[index]) {
+    window.location.href = "login.html";
 }
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+const usernameText = document.getElementById("usernameText");
+const editSection = document.getElementById("editSection");
+const editUsernameInput = document.getElementById("editUsername");
 
-    const name = document.getElementById("courseName").value;
-    const instructor = document.getElementById("instructorName").value;
-
-    const newCourse = {
-        name: name,
-        instructor: instructor
-    };
-
-    courses.push(newCourse);
-    localStorage.setItem("courses", JSON.stringify(courses));
-
-    form.reset();
-    displayCourses();
-});
-
-function deleteCourse(index) {
-    courses.splice(index, 1);
-    localStorage.setItem("courses", JSON.stringify(courses));
-    displayCourses();
+// عرض اليوزر
+function loadProfile() {
+    usernameText.textContent = users[index].name;
 }
 
-displayCourses();
+function enableEdit() {
+    editSection.style.display = "block";
+    editUsernameInput.value = users[index].name;
+}
+
+function cancelEdit() {
+    editSection.style.display = "none";
+}
+
+function saveUsername() {
+    const newUsername = editUsernameInput.value.trim();
+
+    if (newUsername === "") {
+        alert("Username cannot be empty");
+        return;
+    }
+
+    users[index].name = newUsername;
+    localStorage.setItem("users", JSON.stringify(users));
+
+    editSection.style.display = "none";
+    loadProfile();
+}
+
+loadProfile();

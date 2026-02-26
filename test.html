@@ -2,22 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Courses Page</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="test.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Courses Management</h2>
+<div class="container">
+    <h2>My Profile</h2>
 
-        <form id="courseForm">
-            <input type="text" id="courseName" placeholder="Course Name" required>
-            <input type="text" id="instructorName" placeholder="Instructor Name" required>
-            <button type="submit">Add Course</button>
-        </form>
-
-        <ul id="courseList"></ul>
+    <div class="profile-box">
+        <label>Username:</label>
+        <span id="usernameText"></span>
+        <button onclick="enableEdit()" class="edit-btn">Edit</button>
     </div>
+
+    <div id="editSection" style="display:none;">
+        <input type="text" id="editUsername">
+        <button onclick="saveUsername()" class="save-btn">Save</button>
+        <button onclick="cancelEdit()" class="cancel-btn">Cancel</button>
+    </div>
+</div>
 
 <script src="test.js"></script>
 </body>
