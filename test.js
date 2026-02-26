@@ -1,72 +1,50 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let courses = JSON.parse(localStorage.getItem("courses")) || [];
 
-function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+const form = document.getElementById("courseForm");
+const courseList = document.getElementById("courseList");
 
-function addTask() {
-    const title = document.getElementById("title").value;
-    const dueDate = document.getElementById("dueDate").value;
-    const priority = document.getElementById("priority").value;
+function displayCourses() {
+    courseList.innerHTML = "";
 
-    if (title === "" || dueDate === "") {
-        alert("Please fill all fields");
-        return;
-    }
+    courses.forEach((course, index) => {
+        const li = document.createElement("li");
 
-    tasks.push({
-        id: Date.now(),
-        title,
-        dueDate,
-        priority,
-        completed: false
-    });
-
-    saveTasks();
-    renderTasks();
-}
-
-function deleteTask(id) {
-    tasks = tasks.filter(task => task.id !== id);
-    saveTasks();
-    renderTasks();
-}
-
-function toggleTask(id) {
-    const task = tasks.find(task => task.id === id);
-    task.completed = !task.completed;
-    saveTasks();
-    renderTasks();
-}
-
-function renderTasks() {
-    const list = document.getElementById("taskList");
-    list.innerHTML = "";
-
-    tasks.forEach(task => {
-        const row = document.createElement("tr");
-
-        if (task.completed) {
-            row.classList.add("done");
-        }
-
-        row.innerHTML = `
-            <td>${task.title}</td>
-            <td>${task.dueDate}</td>
-            <td class="${task.priority.toLowerCase()}">${task.priority}</td>
-            <td>${task.completed ? "Done" : "Not Done"}</td>
-            <td>
-                <button class="done-btn" onclick="toggleTask(${task.id})">
-                    ${task.completed ? "Undo" : "Done"}
-                </button>
-                <button class="delete-btn" onclick="deleteTask(${task.id})">
-                    Delete
-                </button>
-            </td>
+        li.innerHTML = `
+            <div>
+                <strong>${course.name}</strong><br>
+                <small>${course.instructor}</small>
+            </div>
+            <button class="delete-btn" onclick="deleteCourse(${index})">
+                Delete
+            </button>
         `;
 
-        list.appendChild(row);
+        courseList.appendChild(li);
     });
-}       
+}
 
-renderTasks();
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("courseName").value;
+    const instructor = document.getElementById("instructorName").value;
+
+    const newCourse = {
+        name: name,
+        instructor: instructor
+    };
+
+    courses.push(newCourse);
+    localStorage.setItem("courses", JSON.stringify(courses));
+
+    form.reset();
+    displayCourses();
+});
+
+function deleteCourse(index) {
+    courses.splice(index, 1);
+    localStorage.setItem("courses", JSON.stringify(courses));
+    displayCourses();
+}
+
+displayCourses();

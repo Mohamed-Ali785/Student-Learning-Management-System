@@ -1,51 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tasks</title>
+    <meta charset="UTF-8">
+    <title>Courses Page</title>
     <link rel="stylesheet" href="test.css">
 </head>
 <body>
 
-<h2>Task Manager</h2>
+    <div class="container">
+        <h2>Courses Management</h2>
 
-<div class="task-form">
-    <input type="text" id="title" placeholder="Task Title">
-    <input type="date" id="dueDate">
+        <form id="courseForm">
+            <input type="text" id="courseName" placeholder="Course Name" required>
+            <input type="text" id="instructorName" placeholder="Instructor Name" required>
+            <button type="submit">Add Course</button>
+        </form>
 
-    <select id="priority">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-    </select>
-
-    <button onclick="addTask()">Add Task</button>
-</div>
-
-<div class="controls">
-    <input type="text" id="search" placeholder="Search..." onkeyup="renderTasks()">
-
-    <select id="sort" onchange="renderTasks()">
-        <option value="">Sort By</option>
-        <option value="priority">Priority</option>
-        <option value="date">Due Date</option>
-    </select>
-</div>
-
-<h2>Task Manager</h2>
-
-<table class="task-table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody id="taskList">
-    </tbody>
-</table>
+        <ul id="courseList"></ul>
+    </div>
 
 <script src="test.js"></script>
 </body>

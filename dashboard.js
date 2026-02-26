@@ -38,10 +38,11 @@ const tasks = users[index].tasks
 const totalTasks = tasks.length;
 const completedTasks = tasks.filter(t => t.completed).length;
 const pendingTasks = totalTasks - completedTasks;
-const courses = JSON.parse(localStorage.getItem("courses")) || [];
-const totalCourses = courses.length;
 
+const courses=users[index].courses;
+const totalCourses=courses.length;
 document.getElementById("totalTasks").innerText = totalTasks;
 document.getElementById("completedTasks").innerText = completedTasks;
 document.getElementById("pendingTasks").innerText = pendingTasks;
 document.getElementById("totalCourses").innerText = totalCourses;
+

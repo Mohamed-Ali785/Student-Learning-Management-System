@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="coursesBody">
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="task.html">Tasks</a>
+        <a href="courses.html">Courses</a>
+        <a href="profile.html">Profile</a>
+        <button onclick="logout()">Logout</button>
+    </nav>
+    <div class="create" id="courses">
+            <h2>Courses Management</h2>
+            <form id="manage" onsubmit="add(event)">
+                <input id="courseName" class="text" type="text" placeholder="Course Name" required>
+                <input id="instructor" class="text" type="text" placeholder="Instructor" required>
+                <input type="submit" value="Add Course" id="addCourse">
+            </form>
+    </div>
+     <div class="create">
+            <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="courseList">
+            </tbody>
+        </table>
+    </div>
+    <script src="courses.js"></script>
+
+</body>
+
+</html>
